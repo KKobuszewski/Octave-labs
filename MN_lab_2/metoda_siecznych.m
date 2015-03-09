@@ -4,12 +4,26 @@ function apx_zero = solve_zero_Newton(func, begin_intv, end_intv, epsilon)
 		apx_zero=NaN;
 		return
 	endif
-	apx_zero=count_zero(func(begin_intv),func(end_intv),begin_intv,end_intv);
+	
+	%ustawianie punktu startowego
+	%bierzemy koniec przedziału odpowiadający mniejszej wartości abs funckji
+	%wtedy powinno być szybciej zbierzne
+	if (abs(func(begin_intv))>abs(func(end_intv)))
+		apx_zero=end_intv;
+		old_zero=begin_intv;
+	else
+		apx_zero=begin_intv;
+		old_zero=end_intv;
+	endif
+	
 	iterations = 0;
 	while(abs(func(apx_zero))>epsilon)
 		iterations++;
-		
-		%tu algorytm
+		if ((func(apx_zero)-func(old_zero))==0)
+			old_zero = 
+		bufor = apx_zero;
+		apx_zero = apx_zero - func()()/();
+		old_zero = bufor;
 		
 		if(iterations>256)
 			printf("\nPrzekroczono maksymalną ilość iteracji!\n");
