@@ -19,12 +19,18 @@ function apx_zero = solve_zero_Newton(func, begin_intv, end_intv, epsilon)
 	iterations = 0;
 	while(abs(func(apx_zero))>epsilon)
 		iterations++;
-		if ((func(apx_zero)-func(old_zero))==0)
-			old_zero = 
-		bufor = apx_zero;
-		apx_zero = apx_zero - func()()/();
-		old_zero = bufor;
+		if ((func(apx_zero)-func(old_zero))<epsilon*func(apx_zero))%chcielibysmy by nas wyrzucilo
+			old_zero = old_zero - apx_zero*epsilon;
+		endif
 		
+		%wlasciwy algorytm
+		bufor = apx_zero;
+		printf("%e.\t%e , %e \t",iterations,apx_zero,old_zero)
+		apx_zero = apx_zero - func(apx_zero)*(apx_zero-old_zero)/(func(apx_zero)-func(old_zero));
+		old_zero = bufor;
+		printf("%e , %e\n",apx_zero,old_zero)
+		
+		%petla nieskonczona
 		if(iterations>256)
 			printf("\nPrzekroczono maksymalną ilość iteracji!\n");
 			return
@@ -33,7 +39,7 @@ function apx_zero = solve_zero_Newton(func, begin_intv, end_intv, epsilon)
 	printf("%d. iteracji\n", iterations);
 endfunction
 
-f = @(x)x.+cos(x);
+f = @(x)x.+x.^3;%cos(x);
 x = linspace(-10,10,1000);
 %plot(x,f(x));
 %format long;
