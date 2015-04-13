@@ -1,8 +1,8 @@
 clc
 
 function [L , U] = LU_Dolittle2(A)
-	U = repmat(A);
-	L = repmat(A);
+	U = repmat(A,1);
+	L = repmat(A,1);
 	n = size(A)(1)
 	for ii = 1:n%iteruje po kolumnach
 		for jj = 1:ii %iteruje po wierszach
